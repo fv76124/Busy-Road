@@ -4,14 +4,16 @@ from car import Car
 class Board():
     def __init__(self):
         self.grid = []
+        self.cor_car = []
         
     def create_board(self):
         for column in range (6):
             self.grid.append([])
             for row in range (6):
-                self.grid[column].append('0')             
+                self.grid[column].append(0)             
                 
-    def insert_car(self):
+    def cordinates_of_car(self):
+        cor_car = []
         for line in range(len(Car().position)):
             if Car().position[line][1] == 'H':
                 name = str(Car().position[line][0])
@@ -21,12 +23,12 @@ class Board():
                 if length == '2':
                     cor1 = (x, y)
                     cor2 = (x + 1, y)
-                    print(cor1, cor2)
+                    cor_car.append([name, cor1, cor2])
                 elif length == '3':
                     cor1 = (x, y)
                     cor2 = (x + 1, y)
                     cor3 = (x + 2, y)
-                    car = (cor1, cor2, cor3)
+                    cor_car.append([name, cor1, cor2, cor3])
             elif Car().position[line][1] == 'V':
                 name = str(Car().position[line][0])
                 x = int((Car().position[line][2]))
@@ -34,12 +36,17 @@ class Board():
                 if length == '2':
                     cor1 = (x, y)
                     cor2 = (x, y + 1)
-                    print(cor1, cor2)
+                    cor_car.append([name, cor1, cor2])
                 elif length == '3':
                     cor1 = (x, y)
                     cor2 = (x, y + 1)
                     cor3 = (x, y + 2)
-                    print(cor1, cor2, cor3)
+                    cor_car.append([name, cor1, cor2, cor3])
+        self.cor_car = cor_car
+        
+    def insert_car(self):
+        print(self.cor_car)
+        
         
     def empty_grid(self):
         for column in range(len(self.grid)):
@@ -52,7 +59,7 @@ class Board():
 
         for row in self.grid:
             for char in row:
-                line += char + " "
+                line += str(char) + " "
             line += "\n"
 
         return line.strip()
