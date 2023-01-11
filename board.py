@@ -10,7 +10,7 @@ class Board():
         for column in range (6):
             self.grid.append([])
             for row in range (6):
-                self.grid[column].append(0)             
+                self.grid[column].append('0')
                 
     def cordinates_of_car(self):
         cor_car = []
@@ -21,31 +21,36 @@ class Board():
                 x = int((Car().position[line][2]))
                 y = int((Car().position[line][3]))
                 if length == '2':
-                    cor1 = (x, y)
-                    cor2 = (x + 1, y)
+                    cor1 = [x, y]
+                    cor2 = [x + 1, y]
                     cor_car.append([name, cor1, cor2])
                 elif length == '3':
-                    cor1 = (x, y)
-                    cor2 = (x + 1, y)
-                    cor3 = (x + 2, y)
+                    cor1 = [x, y]
+                    cor2 = [x + 1, y]
+                    cor3 = [x + 2, y]
                     cor_car.append([name, cor1, cor2, cor3])
             elif Car().position[line][1] == 'V':
                 name = str(Car().position[line][0])
                 x = int((Car().position[line][2]))
                 y = int((Car().position[line][3]))
                 if length == '2':
-                    cor1 = (x, y)
-                    cor2 = (x, y + 1)
+                    cor1 = [x, y]
+                    cor2 = [x, y + 1]
                     cor_car.append([name, cor1, cor2])
                 elif length == '3':
-                    cor1 = (x, y)
-                    cor2 = (x, y + 1)
-                    cor3 = (x, y + 2)
+                    cor1 = [x, y]
+                    cor2 = [x, y + 1]
+                    cor3 = [x, y + 2]
                     cor_car.append([name, cor1, cor2, cor3])
         self.cor_car = cor_car
         
     def insert_car(self):
-        print(self.cor_car)
+        print(self.grid)
+        for column in range(len(self.grid)):
+            for row in range(len(self.grid[0])):
+                print("hoi")
+                print(self.grid[str(column)][str(row)])
+                # if self.grid[str(column)][str(row)] == str(self.cor_car[0][1][0]):
         
         
     def empty_grid(self):
@@ -67,5 +72,5 @@ class Board():
     def __repr__(self) -> str:
         """String representation""" 
         
-        return f'{Board()}'
+        return f'{self.grid}'
     
