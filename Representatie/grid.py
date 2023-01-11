@@ -2,13 +2,18 @@
 class Grid():
     def __init__(self):
         self.grid = []
-    
+
     def create_board(self):
         for column in range (6):
             self.grid.append([])
             for row in range (6):
-                self.grid[column].append('0') 
-                              
+                self.grid[column].append('0')
+
+    def emptygrid(self):
+        for column in range(len(self.grid)):
+            for row in range(len(self.grid[0])):
+                self.grid[column][row] = 0
+
     def __str__(self) -> str:
         # inserts enter after every line to create an actual grid
         line = ""
@@ -19,4 +24,3 @@ class Grid():
             line += "\n"
 
         return line.strip()
-    
