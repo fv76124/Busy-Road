@@ -16,4 +16,5 @@ def load_file(filename):
     
 if __name__ == "__main__":
     board = Grid()
+    board.create_board()
     print(board)
