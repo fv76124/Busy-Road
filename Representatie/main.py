@@ -12,8 +12,6 @@ def load_file(filename):
             row = set[3]
             length = set[4]
             
-            
-    
 if __name__ == "__main__":
     board = Grid()
     board.create_board()
