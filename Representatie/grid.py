@@ -7,18 +7,16 @@ class Grid():
         for column in range (6):
             self.grid.append([])
             for row in range (6):
-                self.grid[column].append('-')
-                
-                
-    def __repr__(self):
-        return f'{self.grid}'
-    
-    
+                self.grid[column].append('0') 
+                              
     def __str__(self) -> str:
         # inserts enter after every line to create an actual grid
         line = ""
 
         for row in self.grid:
-            line += str(row) + "\n"
+            for char in row:
+                line += char + " "
+            line += "\n"
 
         return line.strip()
+    
