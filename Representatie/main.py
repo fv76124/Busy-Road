@@ -2,7 +2,9 @@ from grid import Grid
 
 def load_file(filename):
     """ reads the file """
-    pass
+    with open(filename) as file:
+        for line in file:
+            pass
     
 if __name__ == "__main__":
     board = Grid()
