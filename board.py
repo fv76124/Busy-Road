@@ -61,12 +61,12 @@ class Board():
                     if [column, row] == self.cor_car[line][2]:
                         self.grid[row -1][column -1] = f'\033[1;3{(line + 2) % 7};40m{self.cor_car[line][0]}'
                     if len(self.cor_car[line]) > 3:
-                        if [column, row] == self.cor_car[line % 7][3]:
+                        if [column, row] == self.cor_car[line][3]:
                             self.grid[row - 1][column - 1] = f'\033[1;3{(line + 2) % 7};40m{self.cor_car[line][0]}'
                     if self.grid[column - 1][row - 1] == '0':
                         self.grid[column - 1][row - 1] = f'\033[1;37;40m{self.grid[column - 1][row - 1]}'
                     if self.cor_car[line][0] == 'X':
-                        self.cor_car[line][0] = f'\033[1;31;40m{self.cor_car[line][0]}'
+                        self.cor_car[line][0] = f'\033[1;31;41m{self.cor_car[line][0]}'
 
             #     self.cor_car[line][0] = f'\033[1;33;40m{self.cor_car[line][0]}'
             # if self.cor_car[line][0] = f'\033'
