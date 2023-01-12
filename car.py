@@ -1,5 +1,3 @@
-# from board import Board
-
 """ Class for the cars """
 class Car():
     
@@ -7,6 +5,7 @@ class Car():
         self.position = []
         self.load_file(f"gameboards/Rushhour6x6_1.csv")
     
+    """ loads file """
     def load_file(self, filename):
         """ reads the file """
         with open(filename) as file:
@@ -21,7 +20,7 @@ class Car():
                 self.position.append([car, orientation, column, row, length])
             return self.position
     
+    """String representation""" 
     def __repr__(self) -> str:
-        """String representation""" 
         
         return f'{self.position}'

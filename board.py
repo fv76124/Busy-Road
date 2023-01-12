@@ -5,14 +5,15 @@ class Board():
     def __init__(self):
         self.grid = []
         self.cor_car = []
-
+        
+    """ method that creates a board with only zero's """
     def create_board(self):
         for column in range(6):
-            # print("hoi")
             self.grid.append([])
             for row in range (6):
                 self.grid[column].append('0')
-
+                
+    """ takes the file from the car class and reads the information from the car and puts it into a list """
     def cordinates_of_car(self):
         cor_car = []
         for line in range(len(Car().position)):
@@ -45,29 +46,29 @@ class Board():
                     cor_car.append([name, cor1, cor2, cor3])
         self.cor_car = cor_car
 
+    """ inserts the cars into the empty grid """
     def insert_car(self):
         for column in range(len(self.grid) + 1):
             for row in range(len(self.grid[0]) + 1):
                 for line in range(len(self.cor_car)):
-                    print(len(self.cor_car))
                     if [column, row] == self.cor_car[line][1]:
                         self.grid[row -1][column -1] = self.cor_car[line][0]
                     if [column, row] == self.cor_car[line][2]:
                         self.grid[row -1][column -1] = self.cor_car[line][0]
-                        print(len(self.cor_car[line]))
-                        # if len(self.cor_car[line]) == 3:
-                        #     if [column, row] == self.cor_car[line][3]:
-                        #         self.grid[row - 1][column - 1] = self.cor_car[line][0]
+                    if len(self.cor_car[line]) > 3:
+                        if [column, row] == self.cor_car[line][3]:
+                            self.grid[row - 1][column - 1] = self.cor_car[line][0]
 
+    """ creates empty grid if new file needs to be loaded """
     def empty_grid(self):
         for column in range(len(self.grid)):
             for row in range(len(self.grid[0])):
                 self.grid[column][row] = 0
 
+    """ inserts enter after every line to create an actual grid """
     def __str__(self) -> str:
-        # inserts enter after every line to create an actual grid
         line = ""
-
+        
         for row in self.grid:
             for char in row:
                 line += str(char) + " "
@@ -75,7 +76,6 @@ class Board():
 
         return line.strip()
 
+    """ string rerpesentation """
     def __repr__(self) -> str:
-        """String representation"""
-
         return f'{self.grid}'
