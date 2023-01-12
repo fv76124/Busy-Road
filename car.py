@@ -1,3 +1,4 @@
+from board import *
 """ Class for the cars """
 class Car():
     
