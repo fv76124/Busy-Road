@@ -4,7 +4,7 @@ class Car():
     
     def __init__(self):
         self.position = []
-        self.load_file(f"gameboards/Rushhour6x6_1.csv")
+        self.load_file(f"gameboards/Rushhour6x6_3.csv")
     
     """ loads file """
     def load_file(self, filename):

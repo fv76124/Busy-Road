@@ -11,6 +11,9 @@ if __name__ == "__main__":
     positie.cordinates_of_car()
     positie.insert_car()
     print(positie)
+    print("----------")
+    positie.move_car()
+    print(positie)
     # A = Car()
 
     # list.load_file(f"gameboards/Rushhour6x6_1.csv")
