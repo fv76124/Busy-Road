@@ -66,7 +66,7 @@ class Board():
                     if self.grid[column - 1][row - 1] == '0':
                         self.grid[column - 1][row - 1] = f'\033[1;37;40m{self.grid[column - 1][row - 1]}'
                     if self.cor_car[line][0] == 'X':
-                        self.cor_car[line][0] = f'\033[1;31;40m{self.cor_car[line][0]}'
+                        self.cor_car[line][0] = f'\033[1;31;41m{self.cor_car[line][0]}'
 
             #     self.cor_car[line][0] = f'\033[1;33;40m{self.cor_car[line][0]}'
             # if self.cor_car[line][0] = f'\033'
