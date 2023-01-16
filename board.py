@@ -68,87 +68,68 @@ class Board():
     #                     self.cor_car[line][0] = f'\033[1;31;40m{self.cor_car[line][0]}'
     
     def insert_car(self):
-
-        for column in range(len(self.grid) + 1):
-            for row in range(len(self.grid[0]) + 1):
+        for column in range(len(self.grid)):
+            for row in range(len(self.grid[0])):
                 for line in range(len(self.cor_car)):
                     if [column, row] == self.cor_car[line][1]:
-                        self.grid[row - 1][column - 1] = self.cor_car[line][0]
+                        self.grid[row][column] = self.cor_car[line][0]
                     if [column, row] == self.cor_car[line][2]:
-                        self.grid[row -1][column -1] = self.cor_car[line][0]
+                        self.grid[row][column] = self.cor_car[line][0]
                     if len(self.cor_car[line]) > 3:
                         if [column, row] == self.cor_car[line][3]:
-                            self.grid[row - 1][column - 1] = self.cor_car[line][0]
-                    if self.grid[column - 1][row - 1] == '0':
-                        self.grid[column - 1][row - 1] = self.grid[column - 1][row - 1]
+                            self.grid[row][column] = self.cor_car[line][0]
+                    if self.grid[column][row] == '0':
+                        self.grid[column][row] = self.grid[column][row]
                     if self.cor_car[line][0] == 'X':
                         self.cor_car[line][0] = self.cor_car[line][0]
 
     def move_car(self):
-        
-        # eind doel: rode auto [row 3][colom 5 en 6], dus doe de conditie tot dit zo is
-
-        # while self.cor_car[12][2] != self.grid[5][3]:
+    
         rand_car = random.choice(self.cor_car)
 
-
-        print(rand_car[0])
-        print(rand_car[1])
-        print(rand_car[2])
-            # verticaal
         column1 = rand_car[1][0]
-        # print(column1)
         column2 = rand_car[2][0]
-        # print(column2)
         row1 = rand_car[1][1]
-        # print(row1)
-        row2 = rand_car[2][1]
-        # print(row2)
-        
-        # if self.grid[row1 - 2][column1 -1] != None or self.grid[row2][column2 -1] != None or self.grid[row1 - 1][column1 - 2] != None or self.grid[row2 + 1][column2 + 2] != None:
+        row2 = rand_car[2][1]  
+    
         # verticaal
         if column1 == column2:
             # kijken of hij omhoog kan
-            if self.grid[row1 -2][column1 -1] == "0":
-                self.grid[row1 -2][column1 - 1] = rand_car[0]
-                print(self.grid[row1 -2][column1 -1])
-                self.grid[row2 - 1][column2 - 1] = "0"
-                print(self.grid[row2 - 1][column1 -1]) 
+            if row1 - 1 in range(len(self.grid)):
+                if self.grid[row1 -1][column1] == "0":
+                    self.grid[row1 -1][column1] = rand_car[0]
+                    self.grid[row2][column2] = "0"
+                    rand_car[1][1] = row1 - 1
+                    rand_car[2][1] = row2 - 1
             # kijken of hij omlaag kan
-            elif self.grid[row2][column2 - 1] == "0":
-                self.grid[row2][column2 -1] = rand_car[0]
-                print(self.grid[row2][column2 + 1])
-                self.grid[row2 -2][column2 -1] = "0"
-                print(self.grid[row2 -2][column2 -1]) 
-            else:
-                return 0
-    
-        #horizontaal
+            elif  row2 + 1 in range(len(self.grid)):
+                if self.grid[row2 + 1][column2] == "0":
+                    self.grid[row2 + 1][column2] = rand_car[0]
+                    self.grid[row2 -1][column2] = "0"
+                    rand_car[1][1] = row1 + 1
+                    rand_car[2][1] = row2 + 1
+
+            #horizontaal
         elif row1 == row2:
-            # kijken of hij naar links kan
-            if self.grid[row1 - 1][column1 - 2] == "0":
-                self.grid[row1 - 1][column1 - 2] = rand_car[0]
-                print(self.grid[row1 - 1][column1 - 2])
-                self.grid[row2 - 1][column2 - 1] = "0"
-                print(self.grid[row2 - 1][column1 - 1])
                 # kijken of hij naar rechts kan 
-            elif self.grid[row2 + 1][column2 + 2] == "0":
-                self.grid[row2 + 1][column2 + 2] = rand_car[0]
-                print(self.grid[row2 + 1][column2 + 2])
-                self.grid[row2 + 1][column2 + 1] = "0"
-                print(self.grid[row2 + 1][column2 + 1]) 
-            else:
-                return 0
-        else:
-            return 0
+            if column2 + 1 in range(len(self.grid)):
+                if self.grid[row2][column2 + 1] == "0":
+                    self.grid[row2][column2 + 1] = rand_car[0]
+                    self.grid[row1][column1] = "0"
+                    rand_car[1][0] = column1 + 1
+                    rand_car[2][0] = column2 + 1
+                    # kijken of hij naar links kan
+            elif column1 - 1 in range(len(self.grid)):
+                if self.grid[row1][column1 - 1] == "0":
+                    self.grid[row1][column1 - 1] = rand_car[0]
+                    self.grid[row2][column2] = "0"
+                    rand_car[1][0] = column1 - 1
+                    rand_car[2][0] = column2 - 1
+            
+    def is_won(self):
+        if self.grid[2][5] == self.cor_car[8][0]:
+            return True
 
-
-        
-        # auto kan alleen, afhankelijk van zijn orientatie, verplaatsen naar 0 boven of opzij ervan
-        # auto kan alleen naar 0 in dezelfde lijn
-        # auto kan niet buiten de grid
-        # Zodra auto verplaatst is, moeten de oude coordinaten een 0 worden
-        # Als er twee 0 boven en onder staan moet je random de 0 kiezen
     """ creates empty grid if new file needs to be loaded """
     def empty_grid(self):
         for column in range(len(self.grid)):

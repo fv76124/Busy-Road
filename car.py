@@ -15,8 +15,8 @@ class Car():
                 car_info = line.split(',')
                 car = car_info[0]
                 orientation = car_info[1]
-                column = car_info[2]
-                row = car_info[3]
+                column = int(car_info[2]) - 1
+                row = int(car_info[3]) - 1
                 length = car_info[4].strip("\n")
                 self.position.append([car, orientation, column, row, length])
             return self.position
