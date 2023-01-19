@@ -1,27 +1,42 @@
+import copy
+
 from board import *
+
 """ Class for the cars """
 class Car():
-    
-    def __init__(self):
-        self.position = []
-        self.load_file(f"gameboards/Rushhour6x6_3.csv")
-    
-    """ loads file """
-    def load_file(self, filename):
-        """ reads the file """
-        with open(filename) as file:
-            header = file.readline()
-            for line in file:
-                car_info = line.split(',')
-                car = car_info[0]
-                orientation = car_info[1]
-                column = int(car_info[2]) - 1
-                row = int(car_info[3]) - 1
-                length = car_info[4].strip("\n")
-                self.position.append([car, orientation, column, row, length])
-            return self.position
-    
-    """String representation""" 
-    def __repr__(self) -> str:
+
+    def __init__(self, name: str, orientation: str, column: int, row: int, length: int):
+        self.name = name
         
-        return f'{self.position}'
+        # creates list with all coordinates based on the length and orientation
+        self.coordinates = []
+        
+        self.orientation = orientation
+
+        if orientation == 'H':
+            for i in range(length):
+                self.coordinates.append([column + i, row])
+        if orientation == 'V':
+            for i in range(length):
+                self.coordinates.append([column, row + i])
+                
+    """ moves the car """
+    def move(self, cd: int) -> int:
+        if self.orientation == 'H':
+            coordinate_to_move = 0 
+        else:
+            coordinate_to_move = 1
+            
+        for cor in self.coordinates:
+            cor[coordinate_to_move] += cd
+
+    """ gets the coordinates of the part that moves the car (front or back coordinates)"""  
+    def get_front_coordinate(self, cd: int) -> int:
+        if cd < 0:
+            return self.coordinates[0].copy()
+        else:
+            return self.coordinates[len(self.coordinates) - 1].copy()
+
+    """String representation"""
+    def __repr__(self) -> str:
+        return self.name
