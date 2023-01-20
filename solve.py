@@ -24,11 +24,11 @@ class RandomSolver:
         return self.board
 
 class BreathSolve:
-    def __init__(self, moves):
+    def __init__(self, moves, board: Board):
+        self.board = board
         self.dict = {}
         self.queue = []
         self.visited = moves
-
 
     def breath(self):
         #coordinates car nodig

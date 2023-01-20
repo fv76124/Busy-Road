@@ -20,9 +20,9 @@ class Board:
 
     """ method that creates a board with None and appends the car to the set coordinates """
     def create_board(self):
-        for column in range(9):
+        for column in range(6):
             self.grid.append([])
-            for row in range(9):
+            for row in range(6):
                 self.grid[column].append(None)
 
         for car in self.cars.values():
@@ -99,10 +99,17 @@ class Board:
         
     """ checks if the X car is in winning position """
     def is_won(self) -> bool:
+        # for a 6x6 grid
         car = self.at(5, 2)
         if car is not None and car.name == 'X':
             return True
         return False
+    
+        # for a 9x9 grid
+        # car = self.at(8, 4)
+        # if car is not None and car.name == 'X':
+        #     return True
+        # return False
 
     """ inserts enter after every line to create an actual grid """
     def __str__(self) -> str:
