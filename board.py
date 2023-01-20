@@ -1,6 +1,6 @@
 import copy
 from typing import Optional, List
-
+from colorama import *
 from car import Car
 import random
 
@@ -95,7 +95,8 @@ class Board:
         for cor in car.coordinates:
             self.set_position(cor, car)
         self.moves.append([car.name, cd])
-        
+    
+
         
     """ checks if the X car is in winning position """
     def is_won(self) -> bool:
@@ -114,12 +115,21 @@ class Board:
     """ inserts enter after every line to create an actual grid """
     def __str__(self) -> str:
         line = ""
-
+        red = "\033[1;31m"
+        white = "\033[1;37;40m"
+        kleur = 0
         for row in self.grid:
-            for char in row:
-                c = '0' if char is None else str(char)
-                line += c + " "
-            line += "\n"
+                for char in row:
+                    c = '0' if char is None else str(char)
+                    if c == 'X':
+                        c = red+c
+                    elif c == '0':
+                        c = white+c
+                    else:
+                        c = f'\033[1;3{(kleur + 2) % 7};40m'+c
+                        kleur += 1
+                    line += c + " "
+                line += "\n"
 
         return line.strip()
 
