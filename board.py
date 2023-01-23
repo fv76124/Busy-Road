@@ -14,7 +14,10 @@ class Board:
 
         # empty list for the grid 
         self.grid = []
-        
+
+        # empty dict for colours
+        self.colour_dict = {}
+
         # empty list for the made moves
         self.moves = []
 
@@ -117,7 +120,8 @@ class Board:
         line = ""
         red = "\033[1;31m"
         white = "\033[1;37;40m"
-        kleur = 0
+        colour_list = [0, 2, 3, 4, 5, 6]
+        colour = 0
         for row in self.grid:
                 for char in row:
                     c = '0' if char is None else str(char)
@@ -125,9 +129,12 @@ class Board:
                         c = red+c
                     elif c == '0':
                         c = white+c
+                    elif c not in self.colour_dict:
+                        self.colour_dict[c] = f'\033[1;3{colour_list[colour % 6]};40m'+c
+                        c = self.colour_dict[c]
+                        colour += 1
                     else:
-                        c = f'\033[1;3{(kleur + 2) % 7};40m'+c
-                        kleur += 1
+                        c = self.colour_dict[c]
                     line += c + " "
                 line += "\n"
 
