@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from board import Board
 from car import Car
 
-from solve import RandomSolver
+from solve import RandomSolver, BreadthSolver
 
 def load_file(filename: str) -> Board:
     cars = []
@@ -26,9 +26,10 @@ if __name__ == "__main__":
     # lijst = list(range(1,101))
     # oplossingen = []
     # for i in range(100):
-    board = load_file("gameboards/Rushhour9x9_4.csv")
+    board = load_file("gameboards/Rushhour6x6_3.csv")
     board.create_board()
-    solver = RandomSolver(board)
+    # solver = RandomSolver(board)
+    solver = BreadthSolver(board)
     print(board)
     board = solver.do_move()
 
