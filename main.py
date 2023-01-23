@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # lijst = list(range(1,101))
     # oplossingen = []
     # for i in range(100):
-    board = load_file("gameboards/Rushhour6x6_3.csv")
+    board = load_file("gameboards/Rushhour6x6_2.csv")
     board.create_board()
     # solver = RandomSolver(board)
     solver = BreadthSolver(board)

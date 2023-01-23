@@ -32,13 +32,15 @@ class BreadthSolver:
     def __init__(self, board: Board):
         self.board = board
         self.move_queue = [copy.deepcopy(board)]
+        
+        self.visited = {}
 
     """ checks all possible moves """
     def possible_moves(self, board):
         all_moves = []
         for car in board.cars.values():
             for cd in [-1, 1]:
-                while board.can_move(car, cd):
+                if board.can_move(car, cd):
                     all_moves.append([car, cd])
         return all_moves
     
@@ -52,6 +54,13 @@ class BreadthSolver:
             for move in self.possible_moves(board):
                 child = copy.deepcopy(board)
                 child.move_car(child.cars[move[0].name], move[1])
+                
+                # is the copy a visited state? continue, else append to visited and to queue
+                if str(child) in self.visited:
+                    continue
+                else:
+                    self.move_queue.append(child)
+                    self.visited[str(child)] = True
 
     """ checks if queue is emtpy """        
     def empty(self):
