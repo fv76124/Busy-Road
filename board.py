@@ -105,7 +105,7 @@ class Board:
             return True
         return False
     
-        # for a 9x9 grid
+        # # for a 9x9 grid
         # car = self.at(8, 4)
         # if car is not None and car.name == 'X':
         #     return True

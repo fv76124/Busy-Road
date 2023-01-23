@@ -2,7 +2,6 @@ import random
 import matplotlib.pyplot as plt
 from board import Board
 from car import Car
-import time
 
 from solve import RandomSolver
 
@@ -23,28 +22,21 @@ def load_file(filename: str) -> Board:
 
 if __name__ == "__main__":
     random.seed()
-    counter = 0
     # count_list = []
     # lijst = list(range(1,101))
     # oplossingen = []
     # for i in range(100):
-    board = load_file("gameboards/Rushhour6x6_3.csv")
+    board = load_file("gameboards/Rushhour9x9_4.csv")
     board.create_board()
     solver = RandomSolver(board)
     print(board)
-    while True:
-        counter += 1
-        board = solver.do_move()
+    board = solver.do_move()
 
-            # time.sleep(0.5)
-            # print("----------")
-        if board.is_won():
-            print(f"You have won in {counter} sets!!")
-            print(board)
-            break
-    #     count_list.append(counter)
-    #     counter = 0
-    
+    if board.is_won():
+        print(f"You have won in {len(board.moves)} sets!!")
+        print(board)
+        print(board.moves)
+
     # plt.bar(lijst, count_list, color = ['blue', 'red'])
     # plt.title("Histogram Random")
     # plt.xlabel("Oplossingen")
