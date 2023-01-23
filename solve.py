@@ -40,8 +40,10 @@ class BreadthSolver:
         all_moves = []
         for car in board.cars.values():
             for cd in [-1, 1]:
-                if board.can_move(car, cd):
-                    all_moves.append([car, cd])
+                multiple_steps = 1
+                while board.can_move(car, cd * multiple_steps):
+                    all_moves.append([car, cd * multiple_steps])
+                    multiple_steps += 1
         return all_moves
     
     """ does all moves until the queue is emtpy or board is won"""    
