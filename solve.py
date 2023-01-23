@@ -70,3 +70,19 @@ class BreadthSolver:
             return False
         else:
             return True
+
+""" depth first algorithm"""    
+class DepthSolver: 
+    def __init__(self, board: Board):
+        self.board = board
+        self.move_stack = [copy.deepcopy(board)]
+        self.visited = {}
+    
+    def possible_moves(self):
+        pass
+    
+    def do_move(self):
+        pass
+    
+    def empty(self):
+        pass
