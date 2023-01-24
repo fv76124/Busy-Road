@@ -48,7 +48,7 @@ class BreadthSolver:
     
     """ does all moves until the queue is emtpy or board is won"""    
     def do_move(self):
-        while not self.empty():
+        while len(self.move_queue) > 0:
             board = self.move_queue.pop(0)
             if board.is_won():
                 return board
@@ -64,13 +64,6 @@ class BreadthSolver:
                     self.move_queue.append(child)
                     self.visited[str(child)] = True
 
-    """ checks if queue is emtpy """        
-    def empty(self):
-        if len(self.move_queue) > 0:
-            return False
-        else:
-            return True
-
 """ depth first algorithm"""    
 class DepthSolver: 
     def __init__(self, board: Board):
@@ -78,11 +71,33 @@ class DepthSolver:
         self.move_stack = [copy.deepcopy(board)]
         self.visited = {}
     
-    def possible_moves(self):
-        pass
+    def possible_moves(self, board):
+        all_possible_moves = []
+        for car in board.cars.values():
+            for cd in [-1, 1]:
+                multiple_steps = 1
+                while board.can_move(car, cd * multiple_steps):
+                    all_possible_moves.append([car, cd * multiple_steps])
+                    multiple_steps += 1
+        return all_possible_moves 
     
     def do_move(self):
-        pass
-    
-    def empty(self):
-        pass
+         while not len(self.move_stack) == 0:
+            board = self.move_stack.pop()
+            if board.is_won():
+                return board
+            
+            if len(board.moves) > 1500:
+                continue
+
+            for move in self.possible_moves(board):
+                child = copy.deepcopy(board)
+                child.move_car(child.cars[move[0].name], move[1])
+                
+                # is the copy a visited state? continue, else append to visited and to queue
+                if str(child) not in self.visited:
+                    self.move_stack.append(child)
+                    self.visited[str(child)] = True
+                else:
+                    continue
+           
