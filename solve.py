@@ -32,7 +32,6 @@ class BreadthSolver:
     def __init__(self, board: Board):
         self.board = board
         self.move_queue = [copy.deepcopy(board)]
-        
         self.visited = {}
 
     """ checks all possible moves """
@@ -40,19 +39,23 @@ class BreadthSolver:
         all_moves = []
         for car in board.cars.values():
             for cd in [-1, 1]:
-                multiple_steps = 1
-                while board.can_move(car, cd * multiple_steps):
-                    all_moves.append([car, cd * multiple_steps])
-                    multiple_steps += 1
+                mult = 1
+                while board.can_move(car, cd * mult):
+                    all_moves.append([car, cd * mult])
+                    mult += 1
         return all_moves
     
     """ does all moves until the queue is emtpy or board is won"""    
     def do_move(self):
+        last_depth = 0
         while len(self.move_queue) > 0:
             board = self.move_queue.pop(0)
             if board.is_won():
                 return board
-
+            if len(board.moves) != last_depth:
+                last_depth = len(board.moves)
+                print("Depth", last_depth)
+            
             for move in self.possible_moves(board):
                 child = copy.deepcopy(board)
                 child.move_car(child.cars[move[0].name], move[1])
