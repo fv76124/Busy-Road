@@ -101,7 +101,7 @@ class Board:
     
 
         
-    """ checks if the X car is in winning position """
+    """ checks if the X car is in winning position /different solutios per grid """
     def is_won(self) -> bool:
         # for a 6x6 grid
         # car = self.at(5, 2)

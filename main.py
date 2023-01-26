@@ -5,6 +5,7 @@ from car import Car
 
 from solve import RandomSolver, BreadthSolver, DepthSolver
 
+# load file 
 def load_file(filename: str) -> Board:
     cars = []
     with open(filename) as file:
@@ -22,24 +23,28 @@ def load_file(filename: str) -> Board:
 
 if __name__ == "__main__":
     random.seed()
-    # count_list = []
-    # lijst = list(range(1,101))
-    # oplossingen = []
-    # for i in range(100):
     board = load_file("gameboards/Rushhour9x9_5.csv")
     board.create_board()
     # solver = RandomSolver(board)
     solver = BreadthSolver(board)
     # solver = DepthSolver(board)
-    # solver.possible_moves(board)
     print(board)
     board = solver.do_move()
-
+    
+    # print sets and board if won
     if board.is_won():
         print(f"You have won in {len(board.moves)} sets!!")
         print(board)
         print(board.moves)
 
+    # # for histogram
+    # count_list = []
+    # lijst = list(range(1,101))
+    # oplossingen = []
+    # for i in range(100):
+    # solver.possible_moves(board)
+        
+    # # for histogram
     # plt.bar(lijst, count_list, color = ['blue', 'red'])
     # plt.title("Histogram Random")
     # plt.xlabel("Oplossingen")

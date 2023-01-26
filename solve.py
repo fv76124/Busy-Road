@@ -47,14 +47,10 @@ class BreadthSolver:
     
     """ does all moves until the queue is emtpy or board is won"""    
     def do_move(self):
-        last_depth = 0
         while len(self.move_queue) > 0:
             board = self.move_queue.pop(0)
             if board.is_won():
                 return board
-            if len(board.moves) != last_depth:
-                last_depth = len(board.moves)
-                print("Depth", last_depth)
             
             for move in self.possible_moves(board):
                 child = copy.deepcopy(board)
@@ -73,7 +69,8 @@ class DepthSolver:
         self.board = board
         self.move_stack = [copy.deepcopy(board)]
         self.visited = {}
-    
+
+    """ checks all possible moves """
     def possible_moves(self, board):
         all_possible_moves = []
         for car in board.cars.values():
@@ -84,6 +81,7 @@ class DepthSolver:
                     multiple_steps += 1
         return all_possible_moves 
     
+    """ does all moves until the queue is emtpy or board is won"""    
     def do_move(self):
          while not len(self.move_stack) == 0:
             board = self.move_stack.pop()
