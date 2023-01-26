@@ -22,10 +22,10 @@ class Board:
         self.moves = []
 
     """ method that creates a board with None and appends the car to the set coordinates """
-    def create_board(self):
-        for column in range(9):
+    def create_board(self):       
+        for column in range(6):
             self.grid.append([])
-            for row in range(9):
+            for row in range(6):
                 self.grid[column].append(None)
 
         for car in self.cars.values():
@@ -34,10 +34,7 @@ class Board:
                 
     """ method to check if new positions of car is within the grid """
     def range(self, position: list) -> bool:
-        if position[0] < len(self.grid[0]) and position[0] >= 0 and position[1] < len(self.grid) and position[1] >= 0:
-            return True
-        else:
-            return False
+        return position[0] < len(self.grid[0]) and position[0] >= 0 and position[1] < len(self.grid) and position[1] >= 0
 
     """ returns the name of a car based on the given coordinates"""
     def at(self, x: int, y: int) -> Optional[Car]:
@@ -80,10 +77,7 @@ class Board:
             car_front_coordinate[1] += cd
             
         # return true if new coordinates stay within the range of grid and the cordinate is empty (None)
-        if self.range(car_front_coordinate) and self.at_position(car_front_coordinate) is None:
-            return True
-        else:
-            return
+        return self.range(car_front_coordinate) and self.at_position(car_front_coordinate) is None
 
     """ method to move the given car based on old coordinates and new coordinates position """
     def move_car(self, car: Car, cd: int) -> None:
@@ -104,16 +98,16 @@ class Board:
     """ checks if the X car is in winning position /different solutios per grid """
     def is_won(self) -> bool:
         # for a 6x6 grid
-        # car = self.at(5, 2)
-        # if car is not None and car.name == 'X':
-        #     return True
-        # return False
-    
-        # for a 9x9 grid
-        car = self.at(8, 4)
+        car = self.at(5, 2)
         if car is not None and car.name == 'X':
             return True
         return False
+    
+        # for a 9x9 grid
+        # car = self.at(8, 4)
+        # if car is not None and car.name == 'X':
+        #     return True
+        # return False
 
         # # for a 12x12 grid
         # car = self.at(11, 5)
