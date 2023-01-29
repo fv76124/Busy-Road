@@ -140,7 +140,6 @@ class Board:
                     else:
                         line += c + " "
                 line += "\n"
-
         return line.strip()
 
     """ string rerpesentation """
