@@ -23,11 +23,15 @@ def load_file(filename: str) -> Board:
 
 if __name__ == "__main__":
     random.seed()
+<<<<<<< HEAD:main.py
     board = load_file("gameboards/Rushhour9x9_5.csv")
+=======
+    board = load_file("gameboards/Rushhour6x6_1.csv")
+>>>>>>> 51b89e9eb76d0a925a9cd9539fec6b068b4ca8f2:code/main.py
     board.create_board()
     # solver = RandomSolver(board)
-    solver = BreadthSolver(board)
-    # solver = DepthSolver(board)
+    # solver = BreadthSolver(board)
+    solver = DepthSolver(board)
     board = solver.do_move()
     
     # print sets and board if won

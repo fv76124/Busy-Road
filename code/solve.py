@@ -73,11 +73,13 @@ class BreadthSolver:
 
 """ depth first algorithm"""    
 class DepthSolver: 
+    # we need to make use of a set instaed of a dictionary for self.visited,
+    # because we only need to save the keys. 
     def __init__(self, board: Board):
         self.board = board
         self.move_stack = [copy.deepcopy(board)]
-        self.visited = {}
-    
+        self.visited = set()
+    # all posibile movements for a car are here generated and added to a list.
     def possible_moves(self, board):
         all_possible_moves = []
         for car in board.cars.values():
@@ -87,13 +89,15 @@ class DepthSolver:
                     all_possible_moves.append([car, cd * multiple_steps])
                     multiple_steps += 1
         return all_possible_moves 
-    
+    # In this function the car is moved to the next field and the
+    # step is saved add the self.visited if not yet visited.
     def do_move(self):
          while not len(self.move_stack) == 0:
             board = self.move_stack.pop()
             if board.is_won():
                 return board
             
+            # Make use of a limited number of moves to move a step further.
             if len(board.moves) > 1500:
                 continue
 
@@ -104,7 +108,7 @@ class DepthSolver:
                 # is the copy a visited state? continue, else append to visited and to queue
                 if str(child) not in self.visited:
                     self.move_stack.append(child)
-                    self.visited[str(child)] = True
+                    self.visited.add(str(child))
                 else:
                     continue
            

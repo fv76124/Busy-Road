@@ -163,9 +163,11 @@ class Board:
                         colour += 1
                     else:
                         c = self.colour_dict[c]
-                    line += c + " "
+                    if len(c) < 12:
+                        line += c + "  "
+                    else:
+                        line += c + " "
                 line += "\n"
-
         return line.strip()
 
     """ string rerpesentation """
