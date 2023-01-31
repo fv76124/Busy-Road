@@ -31,7 +31,7 @@ class BreadthSolver:
     
     def __init__(self, board: Board):
         self.board = board
-        self.move_queue = [copy.deepcopy(board)]
+        self.move_queue = [board.to_compact_str()]
         self.visited = set()
 
     """ checks all possible moves """
@@ -49,7 +49,8 @@ class BreadthSolver:
     def do_move(self):
         last_depth = 0
         while len(self.move_queue) > 0:
-            board = self.move_queue.pop(0)
+            data_str = self.move_queue.pop(0)
+            board = Board.from_compact_str(data_str)
             if board.is_won():
                 return board
             if len(board.moves) != last_depth:
@@ -60,12 +61,15 @@ class BreadthSolver:
                 child = copy.deepcopy(board)
                 child.move_car(child.cars[move[0].name], move[1])
                 
+                child_data = child.to_compact_str()
+                child_data_str = child_data[0]
+                
                 # is the copy a visited state? continue, else append to visited and to queue
-                if str(child) in self.visited:
+                if child_data_str in self.visited:
                     continue
                 else:
-                    self.move_queue.append(child)
-                    self.visited.add(str(child))
+                    self.move_queue.append(child_data)
+                    self.visited.add(child_data_str)
 
 """ depth first algorithm"""    
 class DepthSolver: 

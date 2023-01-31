@@ -23,7 +23,7 @@ def load_file(filename: str) -> Board:
 
 if __name__ == "__main__":
     random.seed()
-    board = load_file("gameboards/Rushhour6x6_3.csv")
+    board = load_file("gameboards/Rushhour9x9_5.csv")
     board.create_board()
     # solver = RandomSolver(board)
     solver = BreadthSolver(board)
@@ -33,8 +33,21 @@ if __name__ == "__main__":
     # print sets and board if won
     if board.is_won():
         print(f"You have won in {len(board.moves)} sets!!")
-        print(board)
+        # print(board)
         print(board.moves)
+        
+        # print all boards once winning board is found
+        start_board = load_file("gameboards/Rushhour9x9_5.csv")
+        start_board.create_board()
+        print(start_board)
+        print("------")
+        for move in board.moves:
+            start_board.move_car(start_board.cars[move[0]], move[1])
+            print(start_board)
+            print("-------")
+    
+    
+    
 
     # # for histogram
     # count_list = []

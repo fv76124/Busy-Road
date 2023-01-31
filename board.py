@@ -23,9 +23,9 @@ class Board:
 
     """ method that creates a board with None and appends the car to the set coordinates """
     def create_board(self):       
-        for column in range(6):
+        for column in range(9):
             self.grid.append([])
-            for row in range(6):
+            for row in range(9):
                 self.grid[column].append(None)
 
         for car in self.cars.values():
@@ -98,22 +98,50 @@ class Board:
     """ checks if the X car is in winning position /different solutios per grid """
     def is_won(self) -> bool:
         # for a 6x6 grid
-        car = self.at(5, 2)
-        if car is not None and car.name == 'X':
-            return True
-        return False
-    
-        # for a 9x9 grid
-        # car = self.at(8, 4)
+        # car = self.at(5, 2)
         # if car is not None and car.name == 'X':
         #     return True
         # return False
+    
+        # # for a 9x9 grid
+        car = self.at(8, 4)
+        if car is not None and car.name == 'X':
+            return True
+        return False
 
         # # for a 12x12 grid
         # car = self.at(11, 5)
         # if car is not None and car.name == 'X':
         #     return True
         # return False
+
+    def to_compact_str(self):
+        all_cars = []
+        for car in self.cars.values():
+            coordinate = car.get_front_coordinate(-1)
+            str = f"{car.name},{car.orientation},{coordinate[0]},{coordinate[1]},{len(car.coordinates)}"
+            all_cars.append(str)
+        
+        return ["|".join(all_cars), self.moves]
+    
+    @staticmethod
+    def from_compact_str(data):
+        all_cars = data[0].split("|")
+
+        cars = []
+        for car_data_str in all_cars:
+            car_data = car_data_str.split(",")
+            name = car_data[0]
+            orientation = car_data[1]
+            column = int(car_data[2])
+            row = int(car_data[3])
+            length = int(car_data[4])
+            cars.append(Car(name, orientation, column, row, length))
+        board = Board(cars)
+        board.create_board()
+        board.moves = copy.deepcopy(data[1])
+
+        return board
     
     """ inserts enter after every line to create an actual grid """
     def __str__(self) -> str:
