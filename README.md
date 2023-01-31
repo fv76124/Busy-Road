@@ -10,7 +10,7 @@ In de map Code staan alle python bestanden. In de map resultaten staan alle hist
 
 Test:
 Type het volgende in bij een terminal om de code te testen:
-- python3 main.py
+- python3 code/main.py
 
 Auteurs:
 Sem Wierdsma, Redouan Balali, Fien Visser
