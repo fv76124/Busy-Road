@@ -23,7 +23,7 @@ def load_file(filename: str) -> Board:
 
 if __name__ == "__main__":
     random.seed()
-    board = load_file("gameboards/Rushhour9x9_5.csv")
+    board = load_file("gameboards/Rushhour6x6_3.csv")
     board.create_board()
     # solver = RandomSolver(board)
     solver = BreadthSolver(board)
@@ -33,32 +33,31 @@ if __name__ == "__main__":
     # print sets and board if won
     if board.is_won():
         print(f"You have won in {len(board.moves)} sets!!")
-        # print(board)
-        print(board.moves)
-        
-        # print all boards once winning board is found
-        start_board = load_file("gameboards/Rushhour9x9_5.csv")
-        start_board.create_board()
-        print(start_board)
-        print("------")
-        for move in board.moves:
-            start_board.move_car(start_board.cars[move[0]], move[1])
-            print(start_board)
-            print("-------")
+        print(board)
+        # print(board.moves)
+
+        # # print all boards once winning board is found
+        # start_board = load_file("gameboards/Rushhour9x9_5.csv")
+        # start_board.create_board()
+        # print(start_board)
+        # print("------")
+        # for move in board.moves:
+        #     start_board.move_car(start_board.cars[move[0]], move[1])
+        #     print(start_board)
+        #     print("-------")
 
     # # for histogram
-    # count_list = []
-    # lijst = list(range(1,101))
+    # count_list = [33, 1433, 21000]
+    # lijst = [1, 2, 3]
     # oplossingen = []
     # for i in range(100):
     # solver.possible_moves(board)
-        
+    # tick_label = ["Breadth First", "Depth First", "Random"]
     # # for histogram
-    # plt.bar(lijst, count_list, color = ['blue', 'red'])
-    # plt.title("Histogram Random")
-    # plt.xlabel("Oplossingen")
+    # plt.bar(lijst, count_list, tick_label = tick_label, width = 0.8, color = ['blue'])
+
+    # plt.title("Grafiek game 3")
+    # plt.xlabel("Algoritmes")
     # plt.ylabel("Aantal zetten")
-    # plt.xlim(1,100)
-    # plt.ylim(0, 50000)
-    # plt.savefig("Histogram/Histogram3.png")
+    # plt.savefig("Histogram/Grafiek Game 3.png")
 
